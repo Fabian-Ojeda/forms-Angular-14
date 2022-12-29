@@ -9,8 +9,16 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 export class BasicFormComponent implements OnInit {
 
   form = new FormGroup({
-
-  })
+    name : new FormControl('',[Validators.required, Validators.maxLength(8)]),
+    email : new FormControl(''),
+    tel : new FormControl(),
+    dateControl : new FormControl(),
+    numberControl : new FormControl(),
+    category : new FormControl('', Validators.required),
+    tag : new FormControl(),
+    agree : new FormControl(false),
+    gender : new FormControl()
+  });
 
   nameField = new FormControl('',[Validators.required, Validators.maxLength(8)]);
   emailField = new FormControl('');
@@ -30,6 +38,9 @@ export class BasicFormComponent implements OnInit {
     this.categoryField.valueChanges.subscribe(value => {
       alert(value);
     });
+    this.form.get('name').valueChanges.subscribe(value => {
+      this.alertConFormControl(value);
+    });
   }
 
   getNameValue(value){
@@ -45,6 +56,22 @@ export class BasicFormComponent implements OnInit {
     const value = this.nameField.value;
     this.nameField.setValidators(Validators.maxLength(4));
     this.nameField.setValue(value);
+  }
+
+  alertConFormControl(value){
+    alert(value);
+  }
+
+  get telFieldC(){
+    return this.form.get('tel');
+  }
+
+  seNosFue(event){
+    if (this.form.valid){
+      console.log(this.form.value);
+    }else{
+      this.form.controls.name.markAsTouched();
+    }
   }
 
 }

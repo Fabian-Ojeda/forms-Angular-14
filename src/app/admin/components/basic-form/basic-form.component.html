@@ -1,3 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="seNosFue($event)">
+  {{form.get('name').value}}
+  <input
+    [class.is-valid]="form.get('name').dirty && form.get('name').valid" [class.is-invalid]="form.get('name').touched && form.get('name').invalid"
+    type="text" formControlName="name"/>
+  <p>
+  <input type="email" formControlName="email"/>
+  </p>
+
+  <p>
+    {{ telFieldC.value }}
+    <input type="tel" formControlName="tel"/>
+    <!--  <button (click)="getNameValue()" > dele pa ver el valor del input</button>-->
+  </p>
+
+  <p>
+    Category: {{form.get('category').value}}
+    <select formControlName="category">
+      <option *ngFor="let item of optionsSelect; let i = index" value='{{i}}'>{{item}}</option>
+    </select>
+  </p>
+
+
+  <div>
+    <button  type="submit">enviar</button>
+    <button [disabled]="form.invalid"  type="submit">enviar</button>
+  </div>
+</form>
+
 <p>
   {{ nameField.value }} {{ nameField.valid }}
   <input
