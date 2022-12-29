@@ -1,0 +1,61 @@
+<p>
+  {{ nameField.value }} {{ nameField.valid }}
+  <input
+    [class.is-valid]="nameField.dirty && nameField.valid" [class.is-invalid]="nameField.dirty && nameField.invalid"
+    type="text" [formControl]="nameField"/>
+  <button [disabled]="nameField.invalid" >aceptar</button>
+  <button (click)="quitarObligatoriedadDeBoton()">Quitar obligatoriedad</button>
+<!--  <button (click)="getNameValue()" > dele pa ver el valor del input</button>-->
+</p>
+<p>
+  <strong *ngIf="nameField.dirty && nameField.hasError('required')">Este campo es requerido</strong>
+  <strong *ngIf="nameField.hasError('maxlength')">Este campo se paso de la raya practicamente, pues, pues</strong>
+</p>
+<p>
+  {{ emailField.value }}
+  <input type="email" [formControl]="emailField"/>
+  <!--  <button (click)="getNameValue()" > dele pa ver el valor del input</button>-->
+</p>
+
+<p>
+  {{ telField.value }}
+  <input type="tel" [formControl]="telField"/>
+  <!--  <button (click)="getNameValue()" > dele pa ver el valor del input</button>-->
+</p>
+
+<p>
+  {{ dateControl.value }}
+  <input type="date" [formControl]="dateControl"/>
+  <!--  <button (click)="getNameValue()" > dele pa ver el valor del input</button>-->
+</p>
+
+<p>
+  {{ numberControl.value }}
+  <input type="number" [formControl]="numberControl"/>
+  <!--  <button (click)="getNameValue()" > dele pa ver el valor del input</button>-->
+</p>
+
+<p>
+  Category: {{categoryField.value}}
+  <select [formControl]="categoryField">
+    <option *ngFor="let item of optionsSelect; let i = index" value='{{i}}'>{{item}}</option>
+  </select>
+  <button (click)="changeDefaultValue()" >Change default value</button>
+</p>
+
+<p>
+  Category: {{tagField.value}}
+  <select [formControl]="tagField" multiple>
+    <option *ngFor="let item of optionsSelect; let i = index" value='{{i}}'>{{item}}</option>
+  </select>
+  <strong  *ngIf="categoryField.touched && categoryField.hasError('required')" >Por favor seleccione una opción de categoria</strong>
+</p>
+<p>
+  agree: {{agreeField.value}}
+  <input type="checkbox" [formControl]="agreeField">
+</p>
+<p>
+  Gender: {{genderField.value}}
+  <label>Male <input type="radio" value="male" [formControl]="genderField"></label>
+  <label>Female <input type="radio" value="female" [formControl]="genderField"></label>
+</p>
